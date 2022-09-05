@@ -20,4 +20,50 @@ export default function Biodata() {
       {nama}
 
       <br/>
-      <br 
+      <br />
+
+      <label>
+        E-mail :
+        <input type="email" onChange={event => setEmail(event.target.value)}/>
+      </label>
+
+      {email}
+
+      <br />
+      <br />
+
+      <label>
+        Tanggal Lahir :
+        <input type="date" onChange={event => setTanggal(event.target.value)}/>
+      </label>
+
+      {tanggal}
+
+      <br/>
+      <br/>
+
+      Posisi Pembalap : <br/>
+      <label>
+        <input type="radio"
+        value="MotoGP"
+        name="kendaraan" 
+        onChange={event => setKendaraan(event.target.value)}
+        checked={kendaraan === 'MotoGP' ? true : false} />
+        MotoGP
+      </label>
+      &nbsp;&nbsp;
+      <label>
+        <input type="radio"
+        value="F1"
+        name="kendaraan"
+        onChange={event => setKendaraan(event.target.value)}
+        checked={kendaraan === 'F1' ? true : false} />
+        F1
+      </label>
+
+
+
+      
+    </>
+  );
+}
