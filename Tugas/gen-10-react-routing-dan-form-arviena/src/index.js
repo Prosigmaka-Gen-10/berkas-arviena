@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Biodata from "./pages/Biodata";
 import Home from "./pages/Home";
+import PlayerList from "./pages/PlayerList";
+import DetailPemain from "./pages/DetailPemain";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,6 +18,8 @@ root.render(
         <Route path="/" element={<App />} >
         <Route index element={<Home />} />
         <Route path="biodata" element={<Biodata />} />
+        <Route path="player-list" element={<PlayerList />} />
+        <Route path="detail-pemain/:namapemain" element={<DetailPemain />} />
         </Route>
       </Routes>
     </BrowserRouter>

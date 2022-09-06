@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom"
 
 export default function Biodata() {
   const [nama, setNama] = useState();
@@ -85,6 +86,12 @@ export default function Biodata() {
       <button onClick={handleSubmit}>
         Submit
       </button>
+
+      <br />
+
+      <Link to="/player-list">
+				Lihat List Pemain Disini
+			</Link>
 
       
     </>
