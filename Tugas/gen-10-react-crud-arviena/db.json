@@ -1,0 +1,28 @@
+{
+  "songs": [
+    {
+      "id": 1,
+      "artist": " NCT 127 ",
+      "title": " AM 01:27 ",
+      "year": " 2017 "
+    },
+    {
+      "id": 2,
+      "artist": " Olivia Rodrigo ",
+      "title": " Traitor ",
+      "year": " 2021 "
+    },
+    {
+      "id": 3,
+      "artist": " DEAN ",
+      "title": " Instagram ",
+      "year": " 2017 "
+    },
+    {
+      "artist": "Jaz",
+      "title": "Teman Bahagia",
+      "year": "2020",
+      "id": 4
+    }
+  ]
+}
