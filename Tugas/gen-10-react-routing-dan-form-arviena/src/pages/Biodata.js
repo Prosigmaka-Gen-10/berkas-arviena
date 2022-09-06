@@ -10,14 +10,23 @@ export default function Biodata() {
     setNama(eventnya.target.value);
   }
 
+  function handleSubmit () {
+    const payload ={
+      playername : nama,
+      birthdate : tanggal,
+      contact : email,
+      position : kendaraan,
+    }
+
+    console.log(payload)
+  }
+
   return (
     <>
       <label>
         Input Nama : <br />
         <input type="text" onChange={handleInputNama} value={nama}/>
       </label>
-
-      {nama}
 
       <br/>
       <br />
@@ -27,17 +36,13 @@ export default function Biodata() {
         <input type="email" onChange={event => setEmail(event.target.value)}/>
       </label>
 
-      {email}
-
       <br />
       <br />
 
       <label>
-        Tanggal Lahir :
+        Tanggal Lahir : <br/>
         <input type="date" onChange={event => setTanggal(event.target.value)}/>
       </label>
-
-      {tanggal}
 
       <br/>
       <br/>
@@ -61,7 +66,25 @@ export default function Biodata() {
         F1
       </label>
 
+      <br/>
+      <br/>
 
+      <h4> Preview : </h4>
+      <br />
+      Nama : {nama}
+      <br />
+      Email : {email}
+      <br />
+      Tanggal Lahir : {tanggal}
+      <br />
+      Posisi Pembalap : {kendaraan}
+
+      <br />
+      <br />
+
+      <button onClick={handleSubmit}>
+        Submit
+      </button>
 
       
     </>
