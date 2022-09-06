@@ -21,7 +21,13 @@ export default function CrudApi () {
     function handleSubmit (event) {
         event.preventDefault()
 
-        inputNewSongs()
+        if (formInput.id) {
+            updateSongs()
+        }
+        else{
+            inputNewSongs() 
+        }
+        
 
         setFormInput({...originalForm})
     }
@@ -33,10 +39,28 @@ export default function CrudApi () {
             })
     }
 
+    function updateSongs () {
+        axios.put('http://localhost:3023/songs/' + formInput.id, formInput)
+            .then(() => {
+                getSongList()
+            })
+    }
+
+    function deleteSongs (songId) {
+        axios.delete('http://localhost:3023/songs/' + songId)
+            .then(() => {
+                getSongList()
+            })
+    }
+
     function handleInput (event, propName) {
         const currentFormInput = {...formInput}
         currentFormInput[propName] = event.target.value
         setFormInput(currentFormInput)
+    }
+
+    function prepareUpdate (song) {
+        setFormInput({...song})
     }
 
     useEffect(() => {
@@ -85,6 +109,16 @@ export default function CrudApi () {
 					{song.artist} - 
                     {song.title} - 
                     {song.year}
+
+                    &nbsp;&nbsp;
+                    <button onClick={() => prepareUpdate(song)}>
+                        Update
+                    </button>
+
+                    &nbsp;&nbsp;
+                    <button onClick={() => deleteSongs(song.id)}>
+                        Delete
+                    </button>
 				</li>
 			)}
 		</ul>
