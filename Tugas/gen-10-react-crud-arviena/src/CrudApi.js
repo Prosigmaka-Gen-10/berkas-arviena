@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 
+import Spinner from './Spinner'
+
 export default function CrudApi () {
     const originalForm = {
         artist: '',
@@ -10,12 +12,21 @@ export default function CrudApi () {
 
     const [songs, setSongs] = useState([])
     const [formInput, setFormInput] = useState({...originalForm})
+    const [isLoading,  setIsLoading] = useState((true))
 
-    function getSongList () {
-        axios.get('http://localhost:3023/songs')
-            .then((res) => {
-                setSongs(res.data)
-            })
+    async function getSongList () {
+        try{
+            setIsLoading(true)
+            const res = await axios.get('http://localhost:3023/songs')
+            
+            console.log(res.data)
+            setSongs(res.data)
+        } catch (err) {
+            console.log(err)
+            alert('Ada masalah yang terjadi. Mohon mencoba kembali')
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     function handleSubmit (event) {
@@ -33,23 +44,50 @@ export default function CrudApi () {
     }
 
     function inputNewSongs () {
-        axios.post('http://localhost:3023/songs', formInput)
+        setIsLoading(true)
+        axios
+            .post('http://localhost:3023/songs', formInput)
             .then(() => {
                 getSongList()
+            })
+            .catch(err => {
+                console.log(err)
+                alert('Ada masalah yang terjadi. Mohon mencoba kembali')
+            })
+            .finally(() => {
+                setIsLoading(false)
             })
     }
 
     function updateSongs () {
-        axios.put('http://localhost:3023/songs/' + formInput.id, formInput)
+        setIsLoading(true)
+        axios
+            .put('http://localhost:3023/songs/' + formInput.id, formInput)
             .then(() => {
                 getSongList()
+            })
+            .catch(err => {
+                console.log(err)
+                alert('Ada masalah yang terjadi. Mohon mencoba kembali')
+            })
+            .finally(() => {
+                setIsLoading(false)
             })
     }
 
     function deleteSongs (songId) {
-        axios.delete('http://localhost:3023/songs/' + songId)
+        setIsLoading(true)
+        axios
+            .delete('http://localhost:3023/songs/' + songId)
             .then(() => {
                 getSongList()
+            })
+            .catch(err => {
+                console.log(err)
+                alert('Ada masalah yang terjadi. Mohon mencoba kembali')
+            })
+            .finally(() => {
+                setIsLoading(false)
             })
     }
 
@@ -66,6 +104,8 @@ export default function CrudApi () {
     useEffect(() => {
         getSongList()
     }, [])
+
+    if (isLoading) return <Spinner />
 
     return <>
         <form onSubmit={event => handleSubmit(event)}>
